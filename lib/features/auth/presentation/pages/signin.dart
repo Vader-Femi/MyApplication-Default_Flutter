@@ -2,16 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:myapplication/common/widgets/appbar/app_bar.dart';
 import 'package:myapplication/common/widgets/button/basic_app_button.dart';
-import 'package:myapplication/core/configs/assets/app_vectors.dart';
-import 'package:myapplication/domain/usecases/auth/signup.dart';
-import 'package:myapplication/presentation/auth/pages/signin.dart';
-import 'package:myapplication/presentation/home/pages/home_page.dart';
+import 'package:myapplication/core/assets/app_vectors.dart';
+import 'package:myapplication/features/auth/domain/usecases/signin.dart';
+import 'package:myapplication/features/auth/presentation/pages/signup.dart';
+import 'package:myapplication/features/home/presentation/pages/home_page.dart';
 import 'package:myapplication/service_locator.dart';
 
-class SignUp extends StatelessWidget {
-  SignUp({super.key});
+class SignIn extends StatelessWidget {
+  SignIn({super.key});
 
-  final TextEditingController _fullName = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
 
@@ -25,28 +24,29 @@ class SignUp extends StatelessWidget {
           width: 40,
         ),
       ),
+      bottomNavigationBar: null,
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
+          padding: const EdgeInsets.symmetric(horizontal: 30),
         child: Column(
           children: [
             const SizedBox(height: 20),
-            _registerText(),
+            _signinText(),
             const SizedBox(height: 5),
             _supportText(),
             const SizedBox(height: 26),
-            _fullNameField(context),
-            const SizedBox(height: 16),
             _emailField(context),
             const SizedBox(height: 16),
             _passwordField(context),
-            const SizedBox(height: 33),
+            _recoverPasswordButton(context),
+            const SizedBox(height: 13),
             Hero(
               tag: "Next Button",
               child: BasicAppButton(
                 onPressed: () async {
-                  var result = await sl<SignupUseCase>().call(
-                      params: "Name"
-                  );
+
+                  var result = await sl<SigninUseCase>().call(
+                      params: ""
+                      );
 
                   result.fold((l) {
                     var snackbar = SnackBar(content: Text(l));
@@ -56,24 +56,25 @@ class SignUp extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                const HomePage()),
-                        (route) => false);
+                            const HomePage()),
+                            (route) => false);
                   });
+
                 },
-                title: "Create Password",
+                title: "Sign in",
               ),
             ),
             const SizedBox(height: 5),
-            _signinText(context),
+            _registerText(context),
           ],
         ),
       ),
     );
   }
 
-  Widget _registerText() {
+  Widget _signinText() {
     return const Text(
-      "Register",
+      "Sign In",
       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
       textAlign: TextAlign.center,
     );
@@ -104,13 +105,6 @@ class SignUp extends StatelessWidget {
     );
   }
 
-  Widget _fullNameField(BuildContext context) {
-    return TextField(
-      decoration: const InputDecoration(hintText: "Full Name"),
-      controller: _fullName,
-    );
-  }
-
   Widget _emailField(BuildContext context) {
     return TextField(
       decoration: const InputDecoration(hintText: "Enter Email"),
@@ -125,14 +119,26 @@ class SignUp extends StatelessWidget {
     );
   }
 
-  Widget _signinText(BuildContext context) {
+  Widget _recoverPasswordButton(BuildContext context) {
+    return TextButton(
+      onPressed: () {},
+      child: const Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            "Recover password",
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+          )),
+    );
+  }
+
+  Widget _registerText(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 30),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Text(
-            "Do You Have An Account?",
+            "Not A Member ?",
             style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 14,
@@ -143,12 +149,12 @@ class SignUp extends StatelessWidget {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (BuildContext context) => SignIn(),
+                    builder: (BuildContext context) => SignUp(),
                   ),
                 );
               },
               child: const Text(
-                "Sign in",
+                "Register Now",
                 style: TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 14,
@@ -159,5 +165,4 @@ class SignUp extends StatelessWidget {
       ),
     );
   }
-
 }

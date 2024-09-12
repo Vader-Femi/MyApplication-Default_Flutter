@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:myapplication/data/sources/auth/auth_service.dart';
-import 'package:myapplication/domain/repository/auth/auth.dart';
+import 'package:myapplication/features/auth/data/sources/auth_service.dart';
+import 'package:myapplication/features/auth/domain/repository/auth.dart';
 import 'package:myapplication/service_locator.dart';
 
 class AuthRepositoryImpl extends AuthRepository{
