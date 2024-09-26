@@ -7,11 +7,13 @@ import 'package:myapplication/features/choose_mode/presentation/bloc/theme_cubit
 import 'package:myapplication/features/splash/presentation/pages/splash.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:myapplication/service_locator.dart';
+import 'config/routes/AppRoutes.dart';
 
 
 void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
+
   HydratedBloc.storage = await HydratedStorage.build(
       storageDirectory: kIsWeb
           ? HydratedStorage.webStorageDirectory
@@ -38,6 +40,7 @@ class MyApp extends StatelessWidget {
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: mode,
+          onGenerateRoute: AppRoutes.onGenerateRoutes,
           home: const SplashPage(),
         ),
       ),
