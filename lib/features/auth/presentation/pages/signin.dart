@@ -52,12 +52,7 @@ class SignIn extends StatelessWidget {
                     var snackbar = SnackBar(content: Text(l));
                     ScaffoldMessenger.of(context).showSnackBar(snackbar);
                   }, (r) {
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                            const HomePage()),
-                            (route) => false);
+                    Navigator.pushNamed(context, '/Home');
                   });
 
                 },
@@ -146,12 +141,7 @@ class SignIn extends StatelessWidget {
           ),
           TextButton(
               onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => SignUp(),
-                  ),
-                );
+                Navigator.pushNamed(context, '/SignUp');
               },
               child: const Text(
                 "Register Now",

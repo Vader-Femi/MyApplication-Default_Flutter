@@ -52,12 +52,7 @@ class SignUp extends StatelessWidget {
                     var snackbar = SnackBar(content: Text(l));
                     ScaffoldMessenger.of(context).showSnackBar(snackbar);
                   }, (r) {
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                const HomePage()),
-                        (route) => false);
+                    Navigator.pushNamed(context, '/Home');
                   });
                 },
                 title: "Create Password",
@@ -140,12 +135,7 @@ class SignUp extends StatelessWidget {
           ),
           TextButton(
               onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => SignIn(),
-                  ),
-                );
+                Navigator.pushNamed(context, '/SignIn');
               },
               child: const Text(
                 "Sign in",
