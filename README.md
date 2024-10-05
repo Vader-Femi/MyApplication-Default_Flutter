@@ -1,6 +1,8 @@
 # MyApplication
  A demo for creating new projects
 
+---
+
 # To change the package name
 - open terminal and run:
 - ``` flutter pub add -d change_app_package_name ```
@@ -22,6 +24,7 @@
 - ``` dart run change_app_package_name:main com.new.package.name --ios ```
 - Where com.package.name is the new package name
 
+---
 
 # To change the app name
 - open terminal and run:
