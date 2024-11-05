@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:myapplication/common/widgets/appbar/app_bar.dart';
 import 'package:myapplication/common/widgets/button/basic_app_button.dart';
 import 'package:myapplication/core/assets/app_vectors.dart';
+import 'package:myapplication/core/res/data_state.dart';
 import 'package:myapplication/features/auth/domain/usecases/signup.dart';
 import 'package:myapplication/features/auth/presentation/pages/signin.dart';
 import 'package:myapplication/features/home/presentation/pages/home_page.dart';
@@ -47,13 +48,12 @@ class SignUp extends StatelessWidget {
                   var result = await sl<SignupUseCase>().call(
                       params: "Name"
                   );
-
-                  result.fold((l) {
-                    var snackbar = SnackBar(content: Text(l));
-                    ScaffoldMessenger.of(context).showSnackBar(snackbar);
-                  }, (r) {
+                  if (result is DataSuccess){
                     Navigator.pushNamed(context, '/Home');
-                  });
+                  } else if (result is DataFailed){
+                    var snackbar = SnackBar(content: Text(result.errorMessage.toString()));
+                    ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                  }
                 },
                 title: "Create Password",
               ),

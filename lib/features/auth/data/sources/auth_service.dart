@@ -1,20 +1,20 @@
 import 'dart:io';
-import 'package:dartz/dartz.dart';
+import 'package:myapplication/core/res/data_state.dart';
 
 abstract class AuthService {
-  Future<Either> signup(String name);
+  Future<DataState> signUp(String name);
 
-  Future<Either> signin(String name);
+  Future<DataState> signIn(String name);
 }
 
 
 class AuthServiceImpl extends AuthService {
 
   @override
-  Future<Either> signin(String name) async {
+  Future<DataState> signIn(String name) async {
     try {
 
-      return const Right("Sign in was successful");
+      return const DataSuccess("Sign in was successful");
 
     } on HttpException catch (e) {
       String message = "";
@@ -27,16 +27,16 @@ class AuthServiceImpl extends AuthService {
       //   message = e.message ?? "Something went wrong";
       // }
 
-      return Left(message);
+      return DataFailed(errorMessage: message);
     }
   }
 
   @override
-  Future<Either> signup(String name) async {
+  Future<DataState> signUp(String name) async {
     try {
 
 
-      return const Right("Sign up was successful");
+      return const DataSuccess("Sign in was successful");
     } on HttpException catch (e) {
 
       String message = "";
@@ -48,7 +48,7 @@ class AuthServiceImpl extends AuthService {
       //   message = e.message ?? "Something went wrong";
       // }
 
-      return Left(message);
+      return DataFailed(errorMessage: message);
     }
   }
 }

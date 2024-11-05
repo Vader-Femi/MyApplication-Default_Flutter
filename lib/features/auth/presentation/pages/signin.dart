@@ -8,6 +8,8 @@ import 'package:myapplication/features/auth/presentation/pages/signup.dart';
 import 'package:myapplication/features/home/presentation/pages/home_page.dart';
 import 'package:myapplication/service_locator.dart';
 
+import '../../../../core/res/data_state.dart';
+
 class SignIn extends StatelessWidget {
   SignIn({super.key});
 
@@ -44,16 +46,16 @@ class SignIn extends StatelessWidget {
               child: BasicAppButton(
                 onPressed: () async {
 
-                  var result = await sl<SigninUseCase>().call(
+                  var result = await sl<SignInUseCase>().call(
                       params: ""
                       );
 
-                  result.fold((l) {
-                    var snackbar = SnackBar(content: Text(l));
-                    ScaffoldMessenger.of(context).showSnackBar(snackbar);
-                  }, (r) {
+                  if (result is DataSuccess){
                     Navigator.pushNamed(context, '/Home');
-                  });
+                  } else if (result is DataFailed){
+                    var snackbar = SnackBar(content: Text(result.errorMessage.toString()));
+                    ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                  }
 
                 },
                 title: "Sign in",

@@ -22,7 +22,10 @@ Future<void> initializeDependencies() async {
     SignupUseCase(sl())
   );
 
-  sl.registerSingleton<SigninUseCase>(
-    SigninUseCase(sl())
+  sl.registerSingleton<SignInUseCase>(
+    SignInUseCase(sl())
   );
+
+  // Bloc
+  // sl.registerFactory<SignUpBloc>(() => SignUpBloc(sl()));
 }

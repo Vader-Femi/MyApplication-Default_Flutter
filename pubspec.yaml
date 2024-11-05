@@ -49,9 +49,6 @@ dependencies:
   #Service locator
   get_it: ^7.6.7
 
-  #For either
-  dartz: ^0.10.1
-
   #Compare dart objects
   equatable: ^2.0.5
 

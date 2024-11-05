@@ -1,8 +1,8 @@
-import 'package:dartz/dartz.dart';
+import '../../../../core/res/data_state.dart';
 
 abstract class AuthRepository {
 
-  Future<Either> signup(String name);
+  Future<DataState> signUp(String name);
 
-  Future<Either> signin(String name);
+  Future<DataState> signIn(String name);
 }

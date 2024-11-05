@@ -1,4 +1,4 @@
-import 'package:dartz/dartz.dart';
+import 'package:myapplication/core/res/data_state.dart';
 import 'package:myapplication/features/auth/data/sources/auth_service.dart';
 import 'package:myapplication/features/auth/domain/repository/auth.dart';
 
@@ -10,13 +10,13 @@ class AuthRepositoryImpl extends AuthRepository{
 
 
   @override
-  Future<Either> signin(String name) async {
-    return await _authService.signin(name);
+  Future<DataState> signIn(String name) async {
+    return await _authService.signIn(name);
   }
 
   @override
-  Future<Either> signup(String name) async {
-    return await _authService.signup(name);
+  Future<DataState> signUp(String name) async {
+    return await _authService.signUp(name);
   }
 
 }
